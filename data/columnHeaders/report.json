@@ -1,0 +1,6 @@
+{
+        "headers":
+                ["Tumor Characteristics", "Tumor Characteristics.1", "Tumor Characteristics.2", "Tumor Characteristics.3", "Tumor Characteristics.4", "Tumor Characteristics.5", "Tumor Characteristics.6", "Tumor Characteristics.7", "Tumor Characteristics.8", "Tumor Characteristics.9", "Tumor Characteristics.10", "Tumor Characteristics.11", "Tumor Characteristics.12", "MRI Findings", "MRI Findings.1", "MRI Findings.2", "MRI Findings.3", "MRI Findings.4", "Mammography Characteristics", "Mammography Characteristics.1", "Mammography Characteristics.2", "Mammography Characteristics.3", "Mammography Characteristics.4", "Mammography Characteristics.5", "Mammography Characteristics.6", "Mammography Characteristics.7", "US features", "US features.1", "US features.2", "US features.3", "US features.4", "US features.5", "Recurrence"],
+        "labels":
+                ["tumorER", "tumorPR", "tumorHER2", "tumorSubType", "tumorOS", "tumorTNM", "tumorGrade", "tumorNG", "tumorHist", "tumorLoc", "tumorPos", "tumorBBC", "tumorSide", "mriFocal", "mriContra", "mriLymph", "mriSkin", "mriPectoral", "mamAge", "mamBDensity", "mamShape", "mamMargin", "mamDistortion", "mamLDensity", "mamCalcifications", "mamSize", "usShape", "usMargin", "usSize", "usEchogenicity", "usSolid", "usPAS", "recurrence"]
+}
