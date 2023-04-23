@@ -1,6 +1,6 @@
 {
 	"headers": 
-		["Date of Birth (Days)", "Menopause (at diagnosis)", "Race and Ethnicity", "Metastatic at Presentation (Outside of Lymph Nodes)", "Recurrence event(s)"],
+		["Patient Information", "Date of Birth (Days)", "Menopause (at diagnosis)", "Race and Ethnicity", "Metastatic at Presentation (Outside of Lymph Nodes)", "Recurrence event(s)"],
 	"labels": 
-		["dob", "menopause", "race", "metastatic", "recurrence"]
+		["patient", "dob", "menopause", "race", "metastatic", "recurrence"]
 }
