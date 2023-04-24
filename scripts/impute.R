@@ -13,7 +13,7 @@ args <- parse_args(parser, positional_arguments=TRUE)
 df <- read.csv(args$input)
 
 # impute data
-for (name in list(strsplit(args$column, " ")) {
+for (name in list(strsplit(args$column, " "))) {
     df[,name][is.na(df[,name])] <- mean(df[,name], na.rm=T)
 }
 
