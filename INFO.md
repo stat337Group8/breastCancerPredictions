@@ -13,3 +13,4 @@
   - Need to determine which of each to interpret
     - Consider text vs categorical clincal and demographic data
     - Consider which of 529 image characteristics may be useful (perhaps explore what has worked for other research)
+  - Test models imputed and nonimputed
