@@ -14,7 +14,7 @@ df <- read.csv(args$input)
 
 # impute data
 for (name in list(strsplit(args$column, " ")) {
-    df[,name][is.na(df[,name])] <- mean(df[,name], na.rn=T)
+    df[,name][is.na(df[,name])] <- mean(df[,name], na.rm=T)
 }
 
 # save new data frame
