@@ -11,4 +11,4 @@ rowsWithoutNA <- imageData[rowSums(is.na(imageData)) == 0,]
 # columnsWithNA <- names(which(colSums(is.na(imageData))>0))
 
 # save new DF
-write.csv(rowsWithoutNA, args.output)
+write.csv(rowsWithoutNA, args[2])
