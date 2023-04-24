@@ -8,6 +8,7 @@ Project based in R to create linear and logistic regression models for predictin
 - **Questions:**
   - Which modality[ies] of data would be most effective at predicting patient outcome (secondary image characteristics, demographics, clinical data)?
   - Does the MRI equipment have any confounding influence on the imaging data and patient outcome prediction?
+  - Can we demonstrate if the models trained on imputed and nonimputed differ in performance?
 - **Methods:**
   - Logistic Regression
   - Linear Regression
@@ -18,4 +19,3 @@ Project based in R to create linear and logistic regression models for predictin
   - Need to determine which of each to interpret
     - Consider text vs categorical clincal and demographic data
     - Consider which of 529 image characteristics may be useful (perhaps explore what has worked for other research)
-  - Test models imputed and nonimputed
