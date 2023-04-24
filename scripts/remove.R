@@ -13,10 +13,12 @@ args <- parse_args(parser, positional_arguments=TRUE)
 df <- read.csv(args$input)
 
 #find which rows have na
-rowsWithoutNA <- imageData[rowSums(is.na(imageData)) == 0,]
+##rowsWithoutNA <- imageData[rowSums(is.na(imageData)) == 0,]
+rowsWithoutNA <- imageData[complete.cases(imageData), ]
 
 # save new DF
 write.csv(rowsWithoutNA, args$output)
 
 # save ids removed
-write.csv(imageData[rowSums(is.na(imageData)) > 0,args$name], args$saveIndices)
+## write.csv(imageData[rowSums(is.na(imageData)) > 0,args$name], args$saveIndices)
+write.csv(imageData[!complete.cases(imageData), args$name], args$saveIndices)
