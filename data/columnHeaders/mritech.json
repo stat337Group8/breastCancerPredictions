@@ -1,0 +1,4 @@
+{
+	"headers": ["Patient Information", "MRI Technical Information", "MRI Technical Information.1", "MRI Technical Information.2", "MRI Technical Information.3", "MRI Technical Information.4", "MRI Technical Information.5", "MRI Technical Information.7", "MRI Technical Information.8", "MRI Technical Information.9", "MRI Technical Information.10", "MRI Technical Information.11", "MRI Technical Information.12", "MRI Technical Information.13", "MRI Technical Information.14", "MRI Technical Information.15", "MRI Technical Information.16", "MRI Technical Information.17", "Recurrence"], 
+	"labels": ["patients", "days", "manufacturer", "model", "option", "strength", "positionPt", "agent", "volumeContrast", "repetition", "echo", "acquisition", "thickness", "rows", "columns", "diameter", "angle", "fov", "recurrence"]
+}
