@@ -1,5 +1,5 @@
 # organize inputs
-args <- c('./data/demographics.csv', './data/removeIndices.csv', './data/demographicsFixed.csv', FALSE)
+args <- c('./data/mri.csv', './data/removeIndices.csv', './data/mriFixed.csv', FALSE)
 
 # load data frame
 df <- read.csv(args[1])

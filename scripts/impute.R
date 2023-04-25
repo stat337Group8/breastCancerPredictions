@@ -3,7 +3,7 @@ install.packages("missForest")
 library("missForest")
 
 # organize arguments
-args <- c('./data/imageFixed.csv', FALSE, './data/imageFixed.csv')
+args <- c('./data/mriFixed.csv', FALSE, './data/mriFixed.csv')
 
 # load data frame
 df <- read.csv(args[1])
@@ -15,9 +15,9 @@ if (args[2] == TRUE) {
   columns <- columns[!columns %in% c(removeCols)]
   patients <- df[,'patient']
 } else {
-  removeCols <- c('Patient.ID', 'X.1', 'X')
+  removeCols <- c('patients', 'X')
   columns <- columns[!columns %in% c(removeCols)]
-  patients <- df[,'Patient.ID']
+  patients <- df[,'patients']
 }
 
 # impute data using random forest
