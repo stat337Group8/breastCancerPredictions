@@ -7,7 +7,73 @@ library("comprehenr")
 library("ggplot2")
 
 # set working directory
-setwd("C:/Users/HOME PC/Desktop/spring2023/STAT337/breastCancerPredictions/")
+# setwd("PATH TO FOLDER")
+
+# helper functions
+# cross validation accuracy score
+crossVal <- function(data, threshold){
+  # randomly shuffle the index
+  
+  index.random <- sample(1:dim(data)[1])
+  
+  # split the data (index) into 5 folds 
+  groups <- cut(1:dim(data)[1], 5, labels = FALSE)
+  index.fold <- split(index.random, groups)
+  
+  # an empty vector to save individual MSE
+  aCCs <- c()
+  
+  # 5-fold cross-validation
+  for(index.test in index.fold){
+    
+    # creat training and test set
+    test <- data[index.test,]
+    train <- data[-index.test,]
+    
+    # fit a linear model on the training set
+    model <- glm(recurrence ~ ., family = "binomial", data = train)
+    
+    # predict on the test set
+    prob <- predict(model, test, type='response')
+    pred <- ifelse(prob>=threshold, 1, 0) # find a way to select for the best threshold
+    truth <- test$recurrence
+    accuracy <- mean(pred==truth)
+    aCCs <- c(aCCs, accuracy)
+    table(pred, truth)
+  }
+  # plot 5 Accuracies
+  
+  aCCsPercent <- aCCs * 100
+  plot(1:5, aCCsPercent, type='b', col='red', xlab='Fold', ylab='Accuracy', ylim=c(10,100))
+  
+  # Average 5 Accuracies
+  return(mean(aCCs))
+}
+
+# precision, TPR, TNR
+accuracies <- function(prediction, truth){
+  
+  accuracy <- mean(prediction==truth)
+  
+  ## true positive
+  TP <- intersect(which(truth==1), which(prediction==1))
+  ## true negative
+  TN <- intersect(which(truth==0), which(prediction==0))
+  ## false positive
+  FP <- which(truth[which(prediction==1)]==0)
+  ## false negative
+  FN <- which(truth[which(prediction==0)]==1)
+  ## true postive rate
+  TPR <- length(TP) / (length(TP) + length(FN))
+  ## true negative rate
+  TNR <- length(TN) / (length(TN) + length(FP))
+  ## precision
+  prec <- length(TP) / (length(TP) + length(FP))
+  
+  return(c(accuracy, prec, TPR, TNR))
+}
+
+
 
 # open dataset
 dforig <- read.csv('./data/comboFixed.csv')
@@ -66,36 +132,17 @@ p.predict <- predict(logistic.model, data.test, type='response')
 y.predict <- ifelse(p.predict>=0.65, 1, 0)
 y.test <- data.test$recurrence
 table(y.predict, y.test)
-acc.test <- mean(y.predict==y.test)
-acc.test
+evaluators <- accuracies(prediction = y.predict, truth = y.test)
+evaluators
 
-# cross validation accuracy score
+# cross validate accuracy
+CVAcc <- crossVal(dfZ, 0.65)
 
-
-# metrics like precision, TPR, TNR, and ROC/AUROC
-## ROC Curve
+# ROC Curve
 library("PRROC")
 plot(roc.curve(scores.class0 = p.predict[y.test==1], 
                scores.class1 = p.predict[y.test==0], curve = TRUE),
      ylab='True Postive Rate', xlab='False Negative Rate (1 - True Negative Rate)')
-
-## true positive
-TP <- intersect(which(y.test==1), which(y.predict==1))
-## true negative
-TN <- intersect(which(y.test==0), which(y.predict==0))
-## false positive
-FP <- which(y.test[which(y.predict==1)]==0)
-## false negative
-FN <- which(y.test[which(y.predict==0)]==1)
-## true postive rate
-TPR <- length(TP) / (length(TP) + length(FN))
-TPR
-## true negative rate
-TNR <- length(TN) / (length(TN) + length(FP))
-TNR
-## precision
-prec <- length(TP) / (length(TP) + length(FP))
-prec
 
 # backward select using AIC
 step(logistic.model, method='backward')
