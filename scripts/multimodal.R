@@ -69,8 +69,10 @@ accuracies <- function(prediction, truth){
   TNR <- length(TN) / (length(TN) + length(FP))
   ## precision
   prec <- length(TP) / (length(TP) + length(FP))
-  
-  return(c(accuracy, prec, TPR, TNR))
+  ## f1score
+  f1 <- TP/(TP+0.5*(FP+FN))
+
+  return(c(accuracy, prec, TPR, TNR, f1))
 }
 
 
