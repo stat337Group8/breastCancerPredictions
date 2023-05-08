@@ -3,7 +3,7 @@ install.packages("missForest")
 library("missForest")
 
 # organize arguments
-args <- c('./data/reportFixed.csv', TRUE, './data/reportFixed.csv') # TRUE for reports, FALSE for any others
+args <- c('./data/reportFixed.csv', TRUE, './data/reportFixed.csv') # TRUE for reports, FALSE for any others; specific to our project (a workaround)
 
 # load data frame
 df <- read.csv(args[1])
