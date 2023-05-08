@@ -13,6 +13,8 @@ library("ggplot2")
 ###################################################
 # helper functions
 ## cross validation accuracy score
+## the only issue with this function is that before applying it on the backward selection model, must change the glm definition to the correct predictors
+set.seed(2022)
 crossVal <- function(data, threshold){
   # randomly shuffle the index
   
@@ -33,17 +35,17 @@ crossVal <- function(data, threshold){
     train <- data[-index.test,]
     
     library("ROSE")
-    # data.train <- ROSE(recurrence ~ ., data = data.train, seed=2022)$data
-    data.train <- ROSE(recurrence ~ PC2 + PC3 + PC4 + PC5 + PC9 + PC10 + 
+    data.train <- ROSE(recurrence ~ ., data = data.train, seed=2022)$data
+    # data.train <- ROSE(recurrence ~ PC2 + PC3 + PC4 + PC5 + PC9 + PC10 + 
                          PC12 + PC14 + PC16 + PC17 + PC18 + PC19, data.train, seed=2022)$data
-    # weights
-    w0 <- length(data.train$recurrence)/(length(data.train$recurrence[data.train$recurrence==0]))
-    w1 <- length(data.train$recurrence)/(length(data.train$recurrence[data.train$recurrence==1]))
+    # weights (having it follow ROSE so that if completely balanced weights will be 1 each, else weights will be accroding to proportion)
+    w0 <- length(data.train$recurrence)/(length(data.train$recurrence[data.train$recurrence==0])) # weight for class 0
+    w1 <- length(data.train$recurrence)/(length(data.train$recurrence[data.train$recurrence==1])) # weight for class 1
     ws <- to_vec(for(r in data.train$recurrence) if (r == 0) w0 else w1)
     
     # fit a linear model on the training set
-    # model <- glm(recurrence ~ ., family = "binomial", data = train, weights=ws)
-    model <- glm(formula = recurrence ~ PC3 + PC5 + PC9 + PC10 + 
+    model <- glm(recurrence ~ ., family = "binomial", data = train, weights=ws)
+    # model <- glm(formula = recurrence ~ PC3 + PC5 + PC9 + PC10 + 
                    PC12 + PC14 + PC16, family = "binomial", 
                  data = data.train, weights = ws)
     # predict on the test set
@@ -63,7 +65,7 @@ crossVal <- function(data, threshold){
   return(mean(aCCs))
 }
 
-# precision, TPR, TNR
+# precision, TPR, TNR in an accuracies function; created functions to allow for ease of rerunning
 accuracies <- function(prediction, truth){
   
   accuracy <- mean(prediction==truth)
@@ -194,6 +196,7 @@ evaluators2
 CVAcc <- crossVal(dfZ, 0.55)
 print(CVAcc)
 
+# ROSE has its own roc.curve function for doing this separately again
 library(PRROC)
 plot(roc.curve(scores.class0 = selected.p.predict[y.test==1], 
                scores.class1 = selected.p.predict[y.test==0], curve = TRUE),
