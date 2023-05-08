@@ -1,4 +1,8 @@
 
+install.packages("comprehenr")
+install.packages("ROSE")
+install.packages("PRROC")
+install.packages("ggplot2")
 library("comprehenr")
 library("ggplot2")
 
