@@ -7,11 +7,9 @@ Project based in R to create linear and logistic regression models for predictin
   - https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70226903
 - **Questions:**
   - Which modality[ies] of data would be most effective at predicting patient outcome (secondary image characteristics, demographics, clinical data)?
-  - Does the MRI equipment have any confounding influence on the imaging data and patient outcome prediction?
-  - Can we demonstrate if the models trained on imputed and nonimputed differ in performance?
+  - Can we train a logistic model to effectively predict recurrence of breast cancer in former patients?
 - **Methods:**
   - Logistic Regression
-  - Linear Regression
   - Dimension Reduction and Clustering
   - F, T tests for parameter significance
 - **Data Modality:**
